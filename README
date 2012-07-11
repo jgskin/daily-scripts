@@ -1,0 +1,10 @@
+GIT DELETE REFS SCRIPT
+========================================
+
+Script to delete unwanted remote "origin" repository refs.
+
+In your git root run:
+   
+   path/to/script/git-delete-refs.sh refs/tags/sprint.*
+
+It would delete all tags begining with the word sprint.
