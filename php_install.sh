@@ -11,6 +11,8 @@ while [ "$1" != "" ]; do
     if [ $1 == "--sub-php" ]; then
         shift
         sub_php="$1"
+    elif [ $1 == "--no-apxs" ]; then
+        no_apxs=true
     fi
     shift
 done
@@ -21,8 +23,17 @@ apt-get install libicu-dev
 apt-get install g++
 
 if [ ! -d "$sub_php" ]; then
-    #install the main php version 
-    ./configure --with-apxs2=/usr/bin/apxs2 --with-mysql --enable-mbstring --enable-intl
+
+    #apxs default
+    apxs_opt="--with-apxs2=/usr/bin/apxs2"
+
+    if $no_apxs ; then
+        #disable apxs
+        apxs_opt=
+    fi
+
+    #install the main php version  
+    ./configure "$apxs_opt" --with-mysql --enable-mbstring --enable-intl
 else
     #install the sub php version
     ./configure --prefix="$sub_php" --with-mysql --with-libdir=lib/x86_64-linux-gnu --enable-mbstring --enable-intl
