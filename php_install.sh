@@ -29,12 +29,19 @@ if [ ! -d "$sub_php" ]; then
 
     if $no_apxs ; then
         #disable apxs
-        apxs_opt=
+        apxs_opt=""
     fi
 
     #install the main php version  
-    ./configure "$apxs_opt" --with-mysql --enable-mbstring --enable-intl
+    ./configure "$apxs_opt" --with-mysql --with-pdo-mysql --enable-mbstring --enable-intl
 else
     #install the sub php version
-    ./configure --prefix="$sub_php" --with-mysql --with-libdir=lib/x86_64-linux-gnu --enable-mbstring --enable-intl
+    ./configure --prefix="$sub_php" --with-mysql --with-pdo-mysql --with-libdir=lib/x86_64-linux-gnu --enable-mbstring --enable-intl
 fi
+
+make clean
+make
+make install
+
+
+
