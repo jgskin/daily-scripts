@@ -10,7 +10,8 @@ apt-get install libicu-dev
 apt-get install g++
 	""")
 
-opts = ["--with-mysql", "--with-pdo-mysql", "--enable-mbstring", "--enable-intl", "--with-openssl"]
+opts = ["--with-mysql", "--with-pdo-mysql", "--enable-mbstring", "--enable-intl",
+    "--with-openssl", "--with-zlib"]
 
 os.system("./configure " + " ".join(opts))
 
